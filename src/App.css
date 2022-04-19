@@ -1,0 +1,27 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 8vh;
+  background-color: white;
+}
+
+.nav-links {
+  list-style: none;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+
