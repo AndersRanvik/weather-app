@@ -4,8 +4,7 @@ import { ChakraProvider, theme } from '@chakra-ui/react';
 import './App.css';
 import Nav from './navigation/nav';
 import Home from './pages/Home';
-
-import LocationPage from './pages/LocationPage';
+import SearchPage from './pages/SearchPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -18,9 +17,8 @@ function App() {
           <div className="App">
             <Nav />
             <Routes>
-              <Route path="/" element={<Home />}>
-                <Route path="city" element={<LocationPage />} />
-              </Route>
+              <Route path="/" element={<Home />} />
+              <Route path="/search" element={<SearchPage />} />
             </Routes>
           </div>
         </BrowserRouter>

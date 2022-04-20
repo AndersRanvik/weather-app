@@ -8,13 +8,14 @@ import {
   GridItem,
   Image,
 } from '@chakra-ui/react';
+import { IconButton } from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons';
 import { useMediaQuery } from '@chakra-ui/react';
 
-const BoxInfoWeather = ({ data, title }) => {
-  console.log(data, 'data');
-  const city = data?.weatherCast.location?.name;
-  const region = data?.weatherCast.location?.region;
-  const weatherData = data.weatherCast?.current;
+const BoxInfoWeather = ({ weatherCast, addToFavorites }) => {
+  const city = weatherCast.location?.name;
+  const region = weatherCast.location?.region;
+  const weatherData = weatherCast?.current;
   const temp = weatherData?.temp_c;
   const temp_feelslike = weatherData?.feelslike_c;
   const wind = weatherData?.wind_mph * 0.44704;
@@ -23,11 +24,22 @@ const BoxInfoWeather = ({ data, title }) => {
 
   return (
     <Box p={5} shadow="md" borderWidth="1px" minH="40">
-      <Heading fontSize="xl">
+      <Heading fontSize={{ base: 'medium', md: 'xl' }}>
         Været nå i {city} ({region})
+        <IconButton
+          aria-label="Star"
+          icon={<StarIcon />}
+          onClick={() => addToFavorites(city)}
+          ml="5"
+        />
       </Heading>
-      <Stack spacing={6} direction="row" justifyContent="flex-start" pt="5">
-        <Box height="80px" width="110px">
+      <Stack
+        spacing={6}
+        direction={{ base: 'row', md: 'row' }}
+        justifyContent="flex-start"
+        pt="1"
+      >
+        <Box height="80px" width={{ base: '80px', md: '110px' }}>
           <Image
             boxSize="75px"
             objectFit="cover"
@@ -35,16 +47,29 @@ const BoxInfoWeather = ({ data, title }) => {
             alt="weather"
           />
         </Box>
-        <Box height="70px" width="110px">
+        <Box height="80px" width={{ base: '50px', md: '110px' }}>
           <Text fontSize="3xl">{temp}°</Text>
-          <Text fontSize="1xl">Føles som {temp_feelslike}°</Text>
         </Box>
-        <Box height="70px" width="75px">
-          <Text fontSize="3xl">{rain} mm</Text>
-        </Box>
-        <Box height="70px" width="120px">
-          <Text fontSize="3xl">{windTwoDecimals} m/s</Text>
-        </Box>
+        <Stack
+          direction={{ base: 'column', md: 'row' }}
+          justifyContent="flex-start"
+          textAlign="start"
+        >
+          <Box height={{ base: '20px' }} width={{ base: '140px', md: '110px' }}>
+            <Text fontSize={{ md: '1xl' }} pt={{ md: '15px' }}>
+              Føles som {temp_feelslike}°
+            </Text>
+          </Box>
+          <Box height={{ base: '20px' }} width={{ base: '50px', md: '75px' }}>
+            <Text fontSize={{ md: '3xl' }}>{rain} mm</Text>
+          </Box>
+          <Box
+            height={{ base: '20px', md: '70px' }}
+            width={{ base: '50px', md: '120px' }}
+          >
+            <Text fontSize={{ md: '3xl' }}>{windTwoDecimals} m/s</Text>
+          </Box>
+        </Stack>
       </Stack>
     </Box>
   );
@@ -61,7 +86,8 @@ const BoxInfoRain = ({ title, desc }) => {
   );
 };
 
-const WeatherToDay = data => {
+const WeatherToDay = ({ weatherCast, addToFavorites }) => {
+  console.log(weatherCast, 'weatherCast');
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   return (
@@ -71,7 +97,11 @@ const WeatherToDay = data => {
         gap={6}
       >
         <GridItem w="100%">
-          <BoxInfoWeather title="Været nå" data={data} />
+          <BoxInfoWeather
+            title="Været nå"
+            weatherCast={weatherCast}
+            addToFavorites={addToFavorites}
+          />
         </GridItem>
         <GridItem w="100%">
           <BoxInfoRain

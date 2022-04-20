@@ -11,8 +11,8 @@ import {
   Image,
 } from '@chakra-ui/react';
 
-const FutureWeather = weatherCast => {
-  const data = weatherCast?.weatherCast?.forecast?.forecastday;
+const MyFavorites = ({ weatherCast, cities }) => {
+  const data = weatherCast?.forecast?.forecastday;
 
   return (
     <TableContainer>
@@ -85,4 +85,4 @@ const FutureWeather = weatherCast => {
   );
 };
 
-export default FutureWeather;
+export default MyFavorites;

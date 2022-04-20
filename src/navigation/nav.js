@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import '../App.css';
 import logo from '../assets/logotype-black.svg';
-import logo2 from '../assets/Infront_logo.png';
+//import logo2 from '../assets/Infront_logo.png';
 
 function Nav() {
   return (
     <div>
       <nav>
         <h3>
-          <img src={logo} />
+          <img alt="logo" src={logo} />
         </h3>
         <ul className="nav-links">
           <li>
