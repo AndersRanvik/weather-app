@@ -1,20 +1,15 @@
 import { useQuery } from 'react-query';
 
 const useWeather = location => {
-  const { isLoading, data } = useQuery(location && ['location', location], () =>
-    fetch(`http://api.weatherapi.com/v1/forecast.json?key=06a59b151a3b482c8ac202441221904&q=${location}&days=8&aqi=no&alerts=no
+  const defaultLocation = location === undefined ? 'Oslo' : location;
+
+  const { isLoading, data } = useQuery(
+    defaultLocation && ['location', defaultLocation],
+    () =>
+      fetch(`http://api.weatherapi.com/v1/forecast.json?key=06a59b151a3b482c8ac202441221904&q=${defaultLocation}&days=8&aqi=no&alerts=no
       `).then(res => res.json())
   );
   return { isLoading, data };
 };
 
 export default useWeather;
-
-/*
-api met
- `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lon}`
-   const { data } = position;
-   const values = data && data[0];
-  const lat = values?.latitude;
-  const lon = values?.longitude;
-  */

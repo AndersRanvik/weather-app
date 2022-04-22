@@ -12,7 +12,12 @@ import { IconButton } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 import { useMediaQuery } from '@chakra-ui/react';
 
-const BoxInfoWeather = ({ weatherCast, addToFavorites }) => {
+const BoxInfoWeather = ({
+  weatherCast,
+  addToFavorites,
+  favoriteCookie,
+  removeFromFavorites,
+}) => {
   const city = weatherCast.location?.name;
   const region = weatherCast.location?.region;
   const weatherData = weatherCast?.current;
@@ -21,6 +26,7 @@ const BoxInfoWeather = ({ weatherCast, addToFavorites }) => {
   const wind = weatherData?.wind_mph * 0.44704;
   const windTwoDecimals = parseFloat(wind).toFixed(0);
   const rain = weatherData?.precip_mm;
+  const isFavorite = favoriteCookie?.includes(city);
 
   return (
     <Box p={5} shadow="md" borderWidth="1px" minH="40">
@@ -28,8 +34,10 @@ const BoxInfoWeather = ({ weatherCast, addToFavorites }) => {
         Været nå i {city} ({region})
         <IconButton
           aria-label="Star"
-          icon={<StarIcon />}
-          onClick={() => addToFavorites(city)}
+          icon={<StarIcon color={isFavorite ? 'orange' : ''} />}
+          onClick={() =>
+            isFavorite ? removeFromFavorites(city) : addToFavorites(city)
+          }
           ml="5"
         />
       </Heading>
@@ -39,10 +47,10 @@ const BoxInfoWeather = ({ weatherCast, addToFavorites }) => {
         justifyContent="flex-start"
         pt="1"
       >
-        <Box height="80px" width={{ base: '80px', md: '110px' }}>
+        <Box height="80px" width={{ base: '40px', md: '110px' }}>
           <Image
-            boxSize="75px"
-            objectFit="cover"
+            boxSize="70px"
+            objectFit="contain"
             src={weatherData.condition.icon}
             alt="weather"
           />
@@ -86,8 +94,12 @@ const BoxInfoRain = ({ title, desc }) => {
   );
 };
 
-const WeatherToDay = ({ weatherCast, addToFavorites }) => {
-  console.log(weatherCast, 'weatherCast');
+const WeatherToDay = ({
+  weatherCast,
+  addToFavorites,
+  favoriteCookie,
+  removeFromFavorites,
+}) => {
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   return (
@@ -101,6 +113,8 @@ const WeatherToDay = ({ weatherCast, addToFavorites }) => {
             title="Været nå"
             weatherCast={weatherCast}
             addToFavorites={addToFavorites}
+            favoriteCookie={favoriteCookie}
+            removeFromFavorites={removeFromFavorites}
           />
         </GridItem>
         <GridItem w="100%">

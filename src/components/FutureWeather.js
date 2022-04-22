@@ -9,10 +9,23 @@ import {
   TableCaption,
   TableContainer,
   Image,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from '@chakra-ui/react';
 
+import { Button } from '@chakra-ui/react';
+import HourForHour from '../components/HourForHour';
+
 const FutureWeather = weatherCast => {
+  const city = weatherCast?.weatherCast?.location?.name;
   const data = weatherCast?.weatherCast?.forecast?.forecastday;
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <TableContainer>
@@ -75,7 +88,32 @@ const FutureWeather = weatherCast => {
                 </Td>
                 <Td>{item?.day?.daily_will_it_rain} mm</Td>
                 <Td>{maxwindTwoDecimals} m/s</Td>
-                <Td>Se time for time </Td>
+                <Td>
+                  <Button onClick={onOpen} variant="link">
+                    Se time for time
+                  </Button>
+                  <Modal
+                    blockScrollOnMount={false}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    size="5xl"
+                  >
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>Time for time - {city}</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <HourForHour city={city} weatherCast={weatherCast} />
+                      </ModalBody>
+
+                      <ModalFooter>
+                        <Button colorScheme="blue" mr={3} onClick={onClose}>
+                          Closed
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </Td>
               </Tr>
             );
           })}

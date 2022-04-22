@@ -34,7 +34,9 @@ const Search = ({ addSearch }) => {
           <FormErrorMessage>Kunne ikke finne sted</FormErrorMessage>
         )}
       </FormControl>
-      <Button type="submit">Search</Button>
+      <Button type="submit" w="100px">
+        Søk
+      </Button>
     </form>
   );
 };
