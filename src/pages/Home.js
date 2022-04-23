@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Container, VStack, Box, Heading } from '@chakra-ui/react';
+import {
+  Container,
+  VStack,
+  Image,
+  Box,
+  Stack,
+  Heading,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+} from '@chakra-ui/react';
+
 import useWeather from '../hooks/useWeather';
 import MyFavorites from '../components/MyFavorites';
 import Search from '../components/Search';
 import WeatherToDay from '../components/WeatherToDay';
 import FutureWeather from '../components/FutureWeather';
+import WeatherBox from '../components/WeatherBox';
 
 const Home = () => {
   const [search, setSearch] = useState();
   const [favoriteCookie, setFavoriteCookie] = useState([]);
   const { data } = useWeather(search);
-  console.log(data, 'data');
 
   const addToFavorites = city => {
     if (localStorage.getItem('items') == null) {
@@ -52,16 +65,49 @@ const Home = () => {
         </Box>
         {data && (
           <Box>
-            <WeatherToDay
-              weatherCast={data}
-              addToFavorites={addToFavorites}
-              favoriteCookie={favoriteCookie}
-              removeFromFavorites={removeFromFavorites}
-            />
-            <FutureWeather weatherCast={data} />
+            <Tabs>
+              <TabList>
+                <Tab>Oversikt</Tab>
+                <Tab>I nærheten</Tab>
+                <Tab>Kart</Tab>
+              </TabList>
+
+              <TabPanels>
+                <TabPanel>
+                  <WeatherToDay
+                    weatherCast={data}
+                    addToFavorites={addToFavorites}
+                    favoriteCookie={favoriteCookie}
+                    removeFromFavorites={removeFromFavorites}
+                  />
+                  <FutureWeather weatherCast={data} />
+                </TabPanel>
+                <TabPanel>
+                  <Box p={5} shadow="md" borderWidth="1px" pt="27">
+                    <Stack
+                      direction={{ base: 'column', md: 'row' }}
+                      spacing={2}
+                      justifyContent="space-around"
+                    >
+                      <WeatherBox location="Sandefjord" />
+                      <WeatherBox location="Oslo" />
+                      <WeatherBox location="Fredrikstad" />
+                    </Stack>
+                  </Box>
+                </TabPanel>
+                <TabPanel>
+                  <Box height="max-content" justifyContent="space-around">
+                    <Image
+                      src="https://api.met.no/weatherapi/radar/2.0/.gif?area=central_norway&content=animation&type=5level_reflectivity"
+                      alt="map"
+                    />
+                  </Box>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
           </Box>
         )}
-        <Box p={5} shadow="md" borderWidth="1px" pt="27">
+        <Box p={5} pt="27">
           <Heading mb={4} textAlign="start">
             Mine favoritter
           </Heading>

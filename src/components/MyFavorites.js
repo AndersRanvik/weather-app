@@ -44,7 +44,7 @@ const Product = ({ item, removeFromFavorites, weatherCast }) => {
         />
       </Td>
       <Td>{city}</Td>
-      <Td>
+      <Td minWidth="100px">
         <Image
           boxSize="60px"
           objectFit="cover"
@@ -101,7 +101,7 @@ const Product = ({ item, removeFromFavorites, weatherCast }) => {
 
             <ModalFooter>
               <Button colorScheme="blue" mr={3} onClick={onClose}>
-                Closed
+                Lukk
               </Button>
             </ModalFooter>
           </ModalContent>

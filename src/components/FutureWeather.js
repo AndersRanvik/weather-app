@@ -51,7 +51,7 @@ const FutureWeather = weatherCast => {
             return (
               <Tr key={id}>
                 <Td>{item.date}</Td>
-                <Td>
+                <Td minWidth="100px">
                   <Image
                     boxSize="60px"
                     objectFit="cover"
@@ -108,7 +108,7 @@ const FutureWeather = weatherCast => {
 
                       <ModalFooter>
                         <Button colorScheme="blue" mr={3} onClick={onClose}>
-                          Closed
+                          Lukk
                         </Button>
                       </ModalFooter>
                     </ModalContent>
