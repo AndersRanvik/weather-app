@@ -29,7 +29,7 @@ const BoxInfoWeather = ({
   const isFavorite = favoriteCookie?.includes(city);
 
   return (
-    <Box p={5} shadow="md" borderWidth="1px" minH="40">
+    <Box p={2} shadow="md" borderWidth="1px" minH="40">
       <Heading fontSize={{ base: 'medium', md: 'xl' }}>
         Været nå i {city} ({region})
         <IconButton
@@ -103,7 +103,7 @@ const WeatherToDay = ({
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   return (
-    <Box p={5}>
+    <Box>
       <Grid
         templateColumns={isLargerThan768 ? 'repeat(2, 1fr)' : 'repeat(1, 1fr)'}
         gap={6}

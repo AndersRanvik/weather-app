@@ -9,11 +9,7 @@ const WeatherBox = ({ location }) => {
   const nowTemp = data?.current?.temp_c;
 
   return (
-    <Box
-      width={{ base: '300px', md: '360px' }}
-      borderWidth="1px"
-      borderRadius="lg"
-    >
+    <Box width={{ base: '', md: '360px' }} borderWidth="1px" borderRadius="lg">
       <Box p="6">
         <Box display="flex" alignItems="baseline">
           <Box

@@ -83,7 +83,7 @@ const Home = () => {
                   <FutureWeather weatherCast={data} />
                 </TabPanel>
                 <TabPanel>
-                  <Box p={5} shadow="md" borderWidth="1px" pt="27">
+                  <Box p={5} pt="27">
                     <Stack
                       direction={{ base: 'column', md: 'row' }}
                       spacing={2}
