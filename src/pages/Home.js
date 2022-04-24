@@ -148,7 +148,7 @@ const Home = () => {
                 <TabPanel>
                   <Box height="max-content" justifyContent="space-around">
                     <Image
-                      src="https://api.met.no/weatherapi/radar/2.0/.gif?area=central_norway&content=animation&type=5level_reflectivity"
+                      src="https://api.met.no/weatherapi/radar/2.0/?type=reflectivity&area=southern_norway&content=animation"
                       alt="map"
                     />
                   </Box>
