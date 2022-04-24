@@ -103,7 +103,7 @@ const WeatherToDay = ({
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   return (
-    <Box>
+    <Box pb={6}>
       <Grid
         templateColumns={isLargerThan768 ? 'repeat(2, 1fr)' : 'repeat(1, 1fr)'}
         gap={6}

@@ -10,6 +10,7 @@ import {
   TableContainer,
   Image,
 } from '@chakra-ui/react';
+import moment from 'moment';
 
 const HourForHour = ({ weatherCast }) => {
   const data =
@@ -18,7 +19,7 @@ const HourForHour = ({ weatherCast }) => {
 
   return (
     <TableContainer>
-      <Table variant="simple">
+      <Table variant="simple" size="sm">
         <TableCaption>Oppdatert 12:45</TableCaption>
         <Thead>
           <Tr>
@@ -34,7 +35,7 @@ const HourForHour = ({ weatherCast }) => {
             var maxwindTwoDecimals = parseFloat(maxwind).toFixed(0);
             return (
               <Tr key={id}>
-                <Td>{item.time}</Td>
+                <Td>{moment(item?.time).format('HH')}</Td>
                 <Td>
                   <Image
                     boxSize="35px"
