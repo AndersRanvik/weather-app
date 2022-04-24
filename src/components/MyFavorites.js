@@ -24,6 +24,9 @@ import { IconButton } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 import useFavorites from '../hooks/useFavorites';
 import HourForHour from '../components/HourForHour';
+import { useMediaQuery } from '@chakra-ui/react';
+import MyFavoritesMobile from '../components/MyFavoritesMobile';
+import './styles.css';
 
 const Product = ({ item, removeFromFavorites, weatherCast }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,8 +35,9 @@ const Product = ({ item, removeFromFavorites, weatherCast }) => {
   const city = data?.location?.name;
   const maxwind = favoriteData?.day?.maxwind_mph * 0.44704;
   var maxwindTwoDecimals = parseFloat(maxwind).toFixed(0);
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
-  return (
+  return isLargerThan768 ? (
     <Tr>
       <Td>
         <IconButton
@@ -108,10 +112,24 @@ const Product = ({ item, removeFromFavorites, weatherCast }) => {
         </Modal>
       </Td>
     </Tr>
+  ) : (
+    <MyFavoritesMobile
+      favoriteData={favoriteData}
+      item={item}
+      isOpen={isOpen}
+      onClose={onClose}
+      onOpen={onOpen}
+      maxwindTwoDecimals={maxwindTwoDecimals}
+      city={city}
+      weatherCast={weatherCast}
+      removeFromFavorites={removeFromFavorites}
+    />
   );
 };
 
 const MyFavorites = ({ cities, removeFromFavorites, weatherCast }) => {
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
+
   if (cities == null)
     return (
       <Box w="100%" py={4} color="black">
@@ -121,21 +139,31 @@ const MyFavorites = ({ cities, removeFromFavorites, weatherCast }) => {
     );
   return (
     <TableContainer>
-      <Table variant="simple">
+      <Table size="sm" className="table-tiny">
         <TableCaption>Oppdatert 12:45</TableCaption>
         <Thead>
-          <Tr>
-            <Th></Th>
-            <Th>Sted</Th>
-            <Th>Natt</Th>
-            <Th>Morgen</Th>
-            <Th>Ettermiddag</Th>
-            <Th>Kveld</Th>
-            <Th>Maks/Min.temp</Th>
-            <Th>Nedbør</Th>
-            <Th>Vind</Th>
-            <Th></Th>
-          </Tr>
+          {isLargerThan768 ? (
+            <Tr>
+              <Th></Th>
+              <Th>Sted</Th>
+              <Th>Natt</Th>
+              <Th>Morgen</Th>
+              <Th>Ettermiddag</Th>
+              <Th>Kveld</Th>
+              <Th>Maks/Min.temp</Th>
+              <Th>Nedbør</Th>
+              <Th>Vind</Th>
+              <Th></Th>
+            </Tr>
+          ) : (
+            <Tr>
+              <Th></Th>
+              <Th></Th>
+              <Th>Sted</Th>
+              <Th>Dag</Th>
+              <Th>Kveld</Th>
+            </Tr>
+          )}
         </Thead>
         <Tbody>
           {cities?.map(item => {

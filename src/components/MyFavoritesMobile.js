@@ -10,47 +10,47 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
-import HourForHour from '../components/HourForHour';
+import HourForHour from './HourForHour';
 import { Button } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { IconButton } from '@chakra-ui/react';
-import { Stat, StatLabel, StatHelpText } from '@chakra-ui/react';
+import { Stat, StatHelpText } from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons';
 
 const FutureWeatherMobile = ({
-  item,
-  id,
   isOpen,
   onClose,
   onOpen,
   maxwindTwoDecimals,
   city,
   weatherCast,
+  removeFromFavorites,
+  favoriteData,
 }) => {
   return (
-    <Tr key={id}>
+    <Tr>
+      <Td>
+        <IconButton
+          aria-label="Star"
+          icon={<StarIcon color="orange" />}
+          onClick={() => removeFromFavorites(city)}
+        />
+      </Td>
       <Td>
         <Stat>
-          <StatLabel>{id === 0 ? 'I dag' : item.date}</StatLabel>
           <StatHelpText pt={2}>
-            {item?.day?.maxtemp_c}° / {item?.day?.mintemp_c}°
+            {favoriteData?.day?.maxtemp_c}° / {favoriteData?.day?.mintemp_c}°
           </StatHelpText>
           <StatHelpText>{maxwindTwoDecimals} mm</StatHelpText>
         </Stat>
       </Td>
+      <Td>{city}</Td>
 
       <Td>
         <Image
           boxSize="50px"
           objectFit="cover"
-          src={item?.hour[6]?.condition?.icon}
-          alt="weather"
-        />
-      </Td>
-      <Td>
-        <Image
-          boxSize="50px"
-          objectFit="cover"
-          src={item?.hour[14]?.condition?.icon}
+          src={favoriteData?.hour[6]?.condition?.icon}
           alt="weather"
         />
       </Td>
@@ -59,11 +59,10 @@ const FutureWeatherMobile = ({
         <Image
           boxSize="50px"
           objectFit="cover"
-          src={item?.hour[20]?.condition?.icon}
+          src={favoriteData?.hour[20]?.condition?.icon}
           alt="weather"
         />
       </Td>
-
       <Td>
         <Button onClick={onOpen} variant="link">
           <IconButton

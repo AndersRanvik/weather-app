@@ -2,14 +2,14 @@ import { LineChart } from './LineChart';
 import { Box } from '@chakra-ui/react';
 import useWeather from '../hooks/useWeather';
 
-const WeatherBox = ({ location }) => {
+const WeatherBox = ({ location, width, height }) => {
   const { data } = useWeather(location);
   const city = data?.location?.name;
   const region = data?.location?.region;
   const nowTemp = data?.current?.temp_c;
 
   return (
-    <Box width={{ base: '', md: '360px' }} borderWidth="1px" borderRadius="lg">
+    <Box width={{ base: '', md: width }} borderWidth="1px" borderRadius="lg">
       <Box p="6">
         <Box display="flex" alignItems="baseline">
           <Box

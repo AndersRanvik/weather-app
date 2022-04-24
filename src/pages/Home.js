@@ -19,11 +19,13 @@ import Search from '../components/Search';
 import WeatherToDay from '../components/WeatherToDay';
 import FutureWeather from '../components/FutureWeather';
 import WeatherBox from '../components/WeatherBox';
+import { useMediaQuery } from '@chakra-ui/react';
 
 const Home = () => {
   const [search, setSearch] = useState();
   const [favoriteCookie, setFavoriteCookie] = useState([]);
   const { data } = useWeather(search);
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   const addToFavorites = city => {
     if (localStorage.getItem('items') == null) {
@@ -63,7 +65,7 @@ const Home = () => {
         <Box pb="10">
           <Search addSearch={addSearch} location={search} />
           {!search && (
-            <Box p={5} pt="27">
+            <Box py={5} px={0} pt="27">
               <Heading mb={4} textAlign="start">
                 Mine favoritter
               </Heading>
@@ -77,13 +79,19 @@ const Home = () => {
         </Box>
         {data && (
           <Box>
-            <Tabs>
+            <Tabs size="md">
               <TabList>
                 <Tab>Oversikt</Tab>
-                <Tab>Mine favoritter</Tab>
-                <Tab>I nærheten</Tab>
-                <Tab>Kart</Tab>
+                <Tab>Graf</Tab>
+                <Tab>Favoritter</Tab>
+                <Tab>Nærheten</Tab>
+                {isLargerThan768 && <Tab>Kart</Tab>}
               </TabList>
+              {!isLargerThan768 && (
+                <TabList>
+                  <Tab>Kart</Tab>
+                </TabList>
+              )}
 
               <TabPanels>
                 <TabPanel>
@@ -94,10 +102,16 @@ const Home = () => {
                     removeFromFavorites={removeFromFavorites}
                   />
                   <FutureWeather weatherCast={data} />
-                  <WeatherBox location={search} />
                 </TabPanel>
                 <TabPanel>
-                  <Box p={5} pt="27">
+                  <WeatherBox
+                    location={search}
+                    width="1200px"
+                    height={{ base: '360px', md: '800px' }}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <Box py={5} pt="27">
                     <Heading mb={4} textAlign="start">
                       Mine favoritter
                     </Heading>
@@ -109,31 +123,28 @@ const Home = () => {
                   </Box>
                 </TabPanel>
                 <TabPanel>
-                  <Box p={5} pt="27">
+                  <Box pt={5}>
                     <Stack
                       direction={{ base: 'column', md: 'row' }}
                       spacing={2}
                       justifyContent="space-around"
                     >
-                      <WeatherBox location="Sandefjord" />
-                      <WeatherBox location="Oslo" />
-                      <WeatherBox location="Fredrikstad" />
+                      <WeatherBox
+                        location="Sandefjord"
+                        width={{ base: '', md: '360px' }}
+                      />
+                      <WeatherBox
+                        location="Oslo"
+                        width={{ base: '', md: '360px' }}
+                      />
+                      <WeatherBox
+                        location="Fredrikstad"
+                        width={{ base: '', md: '360px' }}
+                      />
                     </Stack>
                   </Box>
                 </TabPanel>
-                <TabPanel>
-                  <Box p={5} pt="27">
-                    <Stack
-                      direction={{ base: 'column', md: 'row' }}
-                      spacing={2}
-                      justifyContent="space-around"
-                    >
-                      <WeatherBox location="Sandefjord" />
-                      <WeatherBox location="Oslo" />
-                      <WeatherBox location="Fredrikstad" />
-                    </Stack>
-                  </Box>
-                </TabPanel>
+
                 <TabPanel>
                   <Box height="max-content" justifyContent="space-around">
                     <Image

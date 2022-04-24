@@ -17,7 +17,6 @@ import {
   StatLabel,
   StatNumber,
   StatHelpText,
-  StatArrow,
   StatGroup,
 } from '@chakra-ui/react';
 
@@ -48,7 +47,7 @@ const BoxInfoWeather = ({
           onClick={() =>
             isFavorite ? removeFromFavorites(city) : addToFavorites(city)
           }
-          ml="5"
+          ml={{ base: 0, md: 5 }}
         />
       </Heading>
       <StatGroup>
