@@ -26,6 +26,7 @@ import HourForHour from '../components/HourForHour';
 import FutureWeatherMobile from '../components/FutureWeatherMobile';
 
 const FutureWeather = weatherCast => {
+  console.log(weatherCast, 'weatherCast');
   const city = weatherCast?.weatherCast?.location?.name;
   const data = weatherCast?.weatherCast?.forecast?.forecastday;
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -34,7 +35,9 @@ const FutureWeather = weatherCast => {
   return (
     <TableContainer>
       <Table size="sm" className="table-tiny">
-        <TableCaption>Oppdatert 12:45</TableCaption>
+        <TableCaption>
+          Oppdatert {weatherCast?.weatherCast?.current?.last_updated}
+        </TableCaption>
         <Thead>
           {isLargerThan768 ? (
             <Tr>

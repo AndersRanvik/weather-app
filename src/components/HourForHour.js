@@ -16,11 +16,13 @@ const HourForHour = ({ weatherCast }) => {
   const data =
     weatherCast?.weatherCast?.forecast?.forecastday[0]?.hour ||
     weatherCast?.forecast?.forecastday[0]?.hour;
-
+  console.log(weatherCast, 'weatherCast12');
   return (
     <TableContainer>
       <Table variant="simple" size="sm">
-        <TableCaption>Oppdatert 12:45</TableCaption>
+        <TableCaption>
+          Oppdatert {weatherCast?.weatherCast?.current?.last_updated}
+        </TableCaption>
         <Thead>
           <Tr>
             <Th>Tid</Th>

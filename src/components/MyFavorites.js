@@ -133,8 +133,7 @@ const MyFavorites = ({ cities, removeFromFavorites, weatherCast }) => {
   if (cities == null)
     return (
       <Box w="100%" py={4} color="black">
-        Her vil du se de siste stedene du har sett værvarsel for. Søk etter
-        steder
+        Her vil du se favorittstedene du har lagt til. Søk etter steder
       </Box>
     );
   return (

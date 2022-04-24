@@ -7,8 +7,8 @@ import {
   Grid,
   GridItem,
   Image,
+  Button,
 } from '@chakra-ui/react';
-import { IconButton } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 
 import {
@@ -38,18 +38,26 @@ const BoxInfoWeather = ({
 
   return (
     <Box p={2} shadow="md" borderWidth="1px" minH="40">
-      <Heading fontSize={{ base: 'medium', md: 'xl' }}>
-        Været nå i {city} ({region})
-        <IconButton
-          aria-label="Star"
-          variant="unstyled"
-          icon={<StarIcon color={isFavorite ? 'orange' : ''} />}
-          onClick={() =>
-            isFavorite ? removeFromFavorites(city) : addToFavorites(city)
-          }
-          ml={{ base: 0, md: 5 }}
-        />
-      </Heading>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Box>
+          <Heading fontSize={{ base: 'medium', md: 'xl' }}>
+            Været nå i {city} ({region})
+          </Heading>
+        </Box>
+        <Box pr={{ base: '2', md: '12' }}>
+          <Button
+            aria-label="Star"
+            variant="unstyled"
+            rightIcon={<StarIcon color={isFavorite ? 'orange' : ''} />}
+            onClick={() =>
+              isFavorite ? removeFromFavorites(city) : addToFavorites(city)
+            }
+            ml={{ base: 5, md: 5 }}
+          >
+            {isFavorite ? 'Lagt til' : 'Legg til'}
+          </Button>
+        </Box>
+      </Box>
       <StatGroup>
         <Stat>
           <Image
