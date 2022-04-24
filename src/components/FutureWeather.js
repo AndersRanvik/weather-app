@@ -50,7 +50,7 @@ const FutureWeather = weatherCast => {
             var maxwindTwoDecimals = parseFloat(maxwind).toFixed(0);
             return (
               <Tr key={id}>
-                <Td>{item.date}</Td>
+                <Td>{id === 0 ? 'I dag' : item.date}</Td>
                 <Td minWidth="100px">
                   <Image
                     boxSize="60px"

@@ -2,16 +2,18 @@ import { Container } from '@chakra-ui/react';
 import '../App.css';
 import logo from '../assets/logotype-black.svg';
 // import logo3 from '../assets/YR_blaa_rgb.png';
+import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@chakra-ui/react';
 import { HamburgerIcon, WarningTwoIcon, CalendarIcon } from '@chakra-ui/icons';
 import { Menu, MenuButton, MenuList, MenuItem, Box } from '@chakra-ui/react';
 //import logo2 from '../assets/Infront_logo.png';
 
 function Nav() {
+  const history = useNavigate();
   return (
     <Container maxW="7xl">
       <Box display="flex" justifyContent="space-between" py="3">
-        <Box>
+        <Box onClick={() => history('/')}>
           <h3>
             <img alt="logo" src={logo} />
           </h3>
