@@ -30,6 +30,7 @@ const Home = () => {
   const lon = data?.location?.lon;
   const { data: dataMet } = useMet(lat, lon);
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
+  const isError = data?.error?.code === 1006;
 
   const addToFavorites = city => {
     if (localStorage.getItem('items') == null) {
@@ -67,7 +68,7 @@ const Home = () => {
     <VStack>
       <Container maxW="7xl">
         <Box pb="10">
-          <Search addSearch={addSearch} location={search} />
+          <Search addSearch={addSearch} location={search} isError={isError} />
           {!search && (
             <Box py={5} px={0} pt="27">
               <Heading mb={4} textAlign="start">
@@ -81,7 +82,7 @@ const Home = () => {
             </Box>
           )}
         </Box>
-        {data && (
+        {!isError && data && (
           <Box>
             <Tabs size="md">
               <TabList>

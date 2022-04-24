@@ -9,12 +9,3 @@ const useFavorites = location => {
 };
 
 export default useFavorites;
-
-/*
-api met
- `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lon}`
-   const { data } = position;
-   const values = data && data[0];
-  const lat = values?.latitude;
-  const lon = values?.longitude;
-  */

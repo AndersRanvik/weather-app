@@ -9,7 +9,7 @@ import {
 import { Button } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/react';
 
-const Search = ({ addSearch }) => {
+const Search = ({ addSearch, isError }) => {
   const [input, setInput] = useState();
 
   const handleOnChange = e => {
@@ -20,8 +20,6 @@ const Search = ({ addSearch }) => {
     e.preventDefault();
     addSearch(input);
   };
-
-  const isError = input === '';
 
   return (
     <form onSubmit={handleSubmit}>

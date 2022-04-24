@@ -32,7 +32,7 @@ const BoxInfoWeather = ({
   const weatherData = weatherCast?.current;
   const rain = weatherData?.precip_mm;
   const isFavorite = favoriteCookie?.includes(city);
-  const metTemp = dataMet?.properties?.timeseries[2]?.data?.instant?.details;
+  const metTemp = dataMet?.properties?.timeseries[3]?.data?.instant?.details;
   const airTemp = metTemp?.air_temperature;
   const wind_speed = metTemp?.wind_speed;
 
@@ -63,7 +63,7 @@ const BoxInfoWeather = ({
           <Image
             boxSize="70px"
             objectFit="contain"
-            src={weatherData.condition.icon}
+            src={weatherData?.condition.icon}
             alt="weather"
           />
         </Stat>
@@ -101,6 +101,10 @@ const WeatherToDay = ({
 }) => {
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
+  const Rainprecipitation =
+    dataMet?.properties?.timeseries[3]?.data?.next_12_hours?.details
+      ?.probability_of_precipitation;
+
   return (
     <Box pb={6}>
       <Grid
@@ -120,7 +124,12 @@ const WeatherToDay = ({
         <GridItem w="100%">
           <BoxInfoRain
             title="Nedbørsvarsel"
-            desc="Det blir opphold neste 90 minutter"
+            desc={
+              Rainprecipitation === 0
+                ? 'Det blir opphold de neste 12 timene'
+                : Rainprecipitation +
+                  ' % sannsynlighet for nedbør de neste 12 timene'
+            }
           />
         </GridItem>
       </Grid>

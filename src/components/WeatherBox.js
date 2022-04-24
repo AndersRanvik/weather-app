@@ -10,7 +10,7 @@ const WeatherBox = ({ location, width, height }) => {
   const city = data?.location?.name;
   const { data: dataMet } = useMet(lat, lon);
   const region = data?.location?.region;
-  const metTemp = dataMet?.properties?.timeseries[2]?.data?.instant?.details;
+  const metTemp = dataMet?.properties?.timeseries[3]?.data?.instant?.details;
   const airTemp = metTemp?.air_temperature;
   return (
     <Box width={{ base: '', md: width }} borderWidth="1px" borderRadius="lg">
