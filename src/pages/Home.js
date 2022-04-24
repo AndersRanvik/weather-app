@@ -62,12 +62,25 @@ const Home = () => {
       <Container maxW="7xl">
         <Box pb="10">
           <Search addSearch={addSearch} location={search} />
+          {!search && (
+            <Box p={5} pt="27">
+              <Heading mb={4} textAlign="start">
+                Mine favoritter
+              </Heading>
+              <MyFavorites
+                weatherCast={data}
+                cities={favoriteCookie}
+                removeFromFavorites={removeFromFavorites}
+              />
+            </Box>
+          )}
         </Box>
         {data && (
           <Box>
             <Tabs>
               <TabList>
                 <Tab>Oversikt</Tab>
+                <Tab>Mine favoritter</Tab>
                 <Tab>I nærheten</Tab>
                 <Tab>Kart</Tab>
               </TabList>
@@ -82,6 +95,31 @@ const Home = () => {
                   />
                   <FutureWeather weatherCast={data} />
                   <WeatherBox location={search} />
+                </TabPanel>
+                <TabPanel>
+                  <Box p={5} pt="27">
+                    <Heading mb={4} textAlign="start">
+                      Mine favoritter
+                    </Heading>
+                    <MyFavorites
+                      weatherCast={data}
+                      cities={favoriteCookie}
+                      removeFromFavorites={removeFromFavorites}
+                    />
+                  </Box>
+                </TabPanel>
+                <TabPanel>
+                  <Box p={5} pt="27">
+                    <Stack
+                      direction={{ base: 'column', md: 'row' }}
+                      spacing={2}
+                      justifyContent="space-around"
+                    >
+                      <WeatherBox location="Sandefjord" />
+                      <WeatherBox location="Oslo" />
+                      <WeatherBox location="Fredrikstad" />
+                    </Stack>
+                  </Box>
                 </TabPanel>
                 <TabPanel>
                   <Box p={5} pt="27">
@@ -108,16 +146,6 @@ const Home = () => {
             </Tabs>
           </Box>
         )}
-        <Box p={5} pt="27">
-          <Heading mb={4} textAlign="start">
-            Mine favoritter
-          </Heading>
-          <MyFavorites
-            weatherCast={data}
-            cities={favoriteCookie}
-            removeFromFavorites={removeFromFavorites}
-          />
-        </Box>
       </Container>
     </VStack>
   );

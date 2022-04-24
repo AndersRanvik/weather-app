@@ -10,7 +10,6 @@ import {
 } from '@chakra-ui/react';
 import { IconButton } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
-import { VisuallyHidden, VisuallyHiddenInput } from '@chakra-ui/react';
 
 import {
   useMediaQuery,
