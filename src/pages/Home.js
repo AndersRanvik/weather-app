@@ -81,6 +81,7 @@ const Home = () => {
                     removeFromFavorites={removeFromFavorites}
                   />
                   <FutureWeather weatherCast={data} />
+                  <WeatherBox location={search} />
                 </TabPanel>
                 <TabPanel>
                   <Box p={5} pt="27">

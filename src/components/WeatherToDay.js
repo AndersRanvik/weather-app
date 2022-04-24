@@ -10,7 +10,17 @@ import {
 } from '@chakra-ui/react';
 import { IconButton } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
-import { useMediaQuery } from '@chakra-ui/react';
+import { VisuallyHidden, VisuallyHiddenInput } from '@chakra-ui/react';
+
+import {
+  useMediaQuery,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatHelpText,
+  StatArrow,
+  StatGroup,
+} from '@chakra-ui/react';
 
 const BoxInfoWeather = ({
   weatherCast,
@@ -34,6 +44,7 @@ const BoxInfoWeather = ({
         Været nå i {city} ({region})
         <IconButton
           aria-label="Star"
+          variant="unstyled"
           icon={<StarIcon color={isFavorite ? 'orange' : ''} />}
           onClick={() =>
             isFavorite ? removeFromFavorites(city) : addToFavorites(city)
@@ -41,44 +52,25 @@ const BoxInfoWeather = ({
           ml="5"
         />
       </Heading>
-      <Stack
-        spacing={6}
-        direction={{ base: 'row', md: 'row' }}
-        justifyContent="flex-start"
-        pt="1"
-      >
-        <Box height="80px" width={{ base: '40px', md: '110px' }}>
+      <StatGroup>
+        <Stat>
           <Image
             boxSize="70px"
             objectFit="contain"
             src={weatherData.condition.icon}
             alt="weather"
           />
-        </Box>
-        <Box height="80px" width={{ base: '50px', md: '110px' }}>
-          <Text fontSize="3xl">{temp}°</Text>
-        </Box>
-        <Stack
-          direction={{ base: 'column', md: 'row' }}
-          justifyContent="flex-start"
-          textAlign="start"
-        >
-          <Box height={{ base: '20px' }} width={{ base: '140px', md: '110px' }}>
-            <Text fontSize={{ md: '1xl' }} pt={{ md: '15px' }}>
-              Føles som {temp_feelslike}°
-            </Text>
-          </Box>
-          <Box height={{ base: '20px' }} width={{ base: '50px', md: '75px' }}>
-            <Text fontSize={{ md: '3xl' }}>{rain} mm</Text>
-          </Box>
-          <Box
-            height={{ base: '20px', md: '70px' }}
-            width={{ base: '50px', md: '120px' }}
-          >
-            <Text fontSize={{ md: '3xl' }}>{windTwoDecimals} m/s</Text>
-          </Box>
-        </Stack>
-      </Stack>
+        </Stat>
+        <Stat>
+          <StatLabel>Nå</StatLabel>
+          <StatNumber>{temp}°</StatNumber>
+        </Stat>
+        <Stat>
+          <StatLabel>Føles som {temp_feelslike}°</StatLabel>
+          <StatNumber>{rain} mm</StatNumber>
+          <StatHelpText>{windTwoDecimals} m/s</StatHelpText>
+        </Stat>
+      </StatGroup>
     </Box>
   );
 };
