@@ -100,7 +100,7 @@ const Product = ({ item, removeFromFavorites, weatherCast }) => {
             <ModalHeader>Time for time - {city}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <HourForHour city={city} weatherCast={weatherCast} />
+              <HourForHour city={city} weatherCast={weatherCast} data={data} />
             </ModalBody>
 
             <ModalFooter>

@@ -20,11 +20,15 @@ import WeatherToDay from '../components/WeatherToDay';
 import FutureWeather from '../components/FutureWeather';
 import WeatherBox from '../components/WeatherBox';
 import { useMediaQuery } from '@chakra-ui/react';
+import useMet from '../hooks/useMet';
 
 const Home = () => {
   const [search, setSearch] = useState();
   const [favoriteCookie, setFavoriteCookie] = useState([]);
   const { data } = useWeather(search);
+  const lat = data?.location?.lat;
+  const lon = data?.location?.lon;
+  const { data: dataMet } = useMet(lat, lon);
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   const addToFavorites = city => {
@@ -100,6 +104,7 @@ const Home = () => {
                     addToFavorites={addToFavorites}
                     favoriteCookie={favoriteCookie}
                     removeFromFavorites={removeFromFavorites}
+                    dataMet={dataMet}
                   />
                   <FutureWeather weatherCast={data} />
                 </TabPanel>
@@ -108,6 +113,7 @@ const Home = () => {
                     location={search}
                     width="1200px"
                     height={{ base: '360px', md: '800px' }}
+                    dataMet={dataMet}
                   />
                 </TabPanel>
                 <TabPanel>

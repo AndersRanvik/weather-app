@@ -26,7 +26,6 @@ import HourForHour from '../components/HourForHour';
 import FutureWeatherMobile from '../components/FutureWeatherMobile';
 
 const FutureWeather = weatherCast => {
-  console.log(weatherCast, 'weatherCast');
   const city = weatherCast?.weatherCast?.location?.name;
   const data = weatherCast?.weatherCast?.forecast?.forecastday;
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -25,16 +25,16 @@ const BoxInfoWeather = ({
   addToFavorites,
   favoriteCookie,
   removeFromFavorites,
+  dataMet,
 }) => {
   const city = weatherCast.location?.name;
   const region = weatherCast.location?.region;
   const weatherData = weatherCast?.current;
-  const temp = weatherData?.temp_c;
-  const temp_feelslike = weatherData?.feelslike_c;
-  const wind = weatherData?.wind_mph * 0.44704;
-  const windTwoDecimals = parseFloat(wind).toFixed(0);
   const rain = weatherData?.precip_mm;
   const isFavorite = favoriteCookie?.includes(city);
+  const metTemp = dataMet?.properties?.timeseries[2]?.data?.instant?.details;
+  const airTemp = metTemp?.air_temperature;
+  const wind_speed = metTemp?.wind_speed;
 
   return (
     <Box p={2} shadow="md" borderWidth="1px" minH="40">
@@ -69,12 +69,12 @@ const BoxInfoWeather = ({
         </Stat>
         <Stat>
           <StatLabel>Nå</StatLabel>
-          <StatNumber>{temp}°</StatNumber>
+          <StatNumber>{airTemp}°</StatNumber>
         </Stat>
         <Stat>
-          <StatLabel>Føles som {temp_feelslike}°</StatLabel>
+          <StatLabel>Føles som {airTemp}°</StatLabel>
           <StatNumber>{rain} mm</StatNumber>
-          <StatHelpText>{windTwoDecimals} m/s</StatHelpText>
+          <StatHelpText>{wind_speed} m/s</StatHelpText>
         </Stat>
       </StatGroup>
     </Box>
@@ -97,6 +97,7 @@ const WeatherToDay = ({
   addToFavorites,
   favoriteCookie,
   removeFromFavorites,
+  dataMet,
 }) => {
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
@@ -113,6 +114,7 @@ const WeatherToDay = ({
             addToFavorites={addToFavorites}
             favoriteCookie={favoriteCookie}
             removeFromFavorites={removeFromFavorites}
+            dataMet={dataMet}
           />
         </GridItem>
         <GridItem w="100%">

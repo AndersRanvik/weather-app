@@ -12,11 +12,11 @@ import {
 } from '@chakra-ui/react';
 import moment from 'moment';
 
-const HourForHour = ({ weatherCast }) => {
+const HourForHour = ({ weatherCast, data: favData }) => {
   const data =
     weatherCast?.weatherCast?.forecast?.forecastday[0]?.hour ||
-    weatherCast?.forecast?.forecastday[0]?.hour;
-  console.log(weatherCast, 'weatherCast12');
+    weatherCast?.forecast?.forecastday[0]?.hour ||
+    favData?.forecast?.forecastday[0]?.hour;
   return (
     <TableContainer>
       <Table variant="simple" size="sm">
