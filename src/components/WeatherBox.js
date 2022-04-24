@@ -6,6 +6,7 @@ const WeatherBox = ({ location, width, height }) => {
   const { data } = useWeather(location);
   const city = data?.location?.name;
   const region = data?.location?.region;
+  
   const nowTemp = data?.current?.temp_c;
 
   return (

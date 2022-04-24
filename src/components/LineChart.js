@@ -39,6 +39,16 @@ export const LineChart = ({ locationData }) => {
     return { x: moment(item?.time).format('HH'), y: item?.temp_c };
   });
 
+  const newArrayWind = arrayHours?.map((item, i) => {
+    const maxwind = item?.wind_mph * 0.44704;
+    var maxwindTwoDecimals = parseFloat(maxwind).toFixed(0);
+    return { x: moment(item?.time).format('HH'), y: maxwindTwoDecimals };
+  });
+
+  const uvArray = arrayHours?.map((item, i) => {
+    return { x: moment(item?.time).format('HH'), y: item?.uv };
+  });
+
   const data = {
     labels,
     datasets: [
@@ -47,6 +57,18 @@ export const LineChart = ({ locationData }) => {
         data: newArray,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+      {
+        label: 'Vind',
+        data: newArrayWind,
+        borderColor: 'rgb(0,191,255)',
+        backgroundColor: 'rgb(0,191,255)',
+      },
+      {
+        label: 'UV',
+        data: uvArray,
+        borderColor: 'rgb(154,205,50)',
+        backgroundColor: 'rgb(154,205,50)',
       },
     ],
   };

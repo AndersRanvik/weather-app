@@ -157,10 +157,11 @@ const MyFavorites = ({ cities, removeFromFavorites, weatherCast }) => {
           ) : (
             <Tr>
               <Th></Th>
-              <Th></Th>
+              <Th>Vær</Th>
               <Th>Sted</Th>
               <Th>Dag</Th>
               <Th>Kveld</Th>
+              <Th></Th>
             </Tr>
           )}
         </Thead>
