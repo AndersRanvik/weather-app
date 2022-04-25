@@ -88,8 +88,8 @@ const Home = () => {
               <TabList>
                 <Tab>Oversikt</Tab>
                 <Tab>Graf</Tab>
-                <Tab>Favoritter</Tab>
-                <Tab>Nærheten</Tab>
+                <Tab> Mine favoritter</Tab>
+                <Tab>I nærheten</Tab>
                 {isLargerThan768 && <Tab>Kart</Tab>}
               </TabList>
               {!isLargerThan768 && (

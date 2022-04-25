@@ -36,7 +36,6 @@ const Product = ({ item, removeFromFavorites, weatherCast }) => {
   const maxwind = favoriteData?.day?.maxwind_mph * 0.44704;
   var maxwindTwoDecimals = parseFloat(maxwind).toFixed(0);
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
-
   return isLargerThan768 ? (
     <Tr>
       <Td>
@@ -139,7 +138,7 @@ const MyFavorites = ({ cities, removeFromFavorites, weatherCast }) => {
   return (
     <TableContainer>
       <Table size="sm" className="table-tiny">
-        <TableCaption>Oppdatert 12:45</TableCaption>
+        <TableCaption>Oppdatert</TableCaption>
         <Thead>
           {isLargerThan768 ? (
             <Tr>
